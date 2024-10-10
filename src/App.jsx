@@ -13,7 +13,7 @@ import NotesDetail from "./components/notes/NotesDetail";
 
 const App = () => {
   const [notes, setNotes] = useState(getInitialData());
-  const [fixedNotes, setFixedNotes] = useState(getInitialData());
+  const [searchedNotes, setSearchedNotes] = useState([]);
   const [detailNotes, setDetailNotes] = useState({});
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -61,7 +61,6 @@ const App = () => {
     });
 
     setNotes(newNotes);
-    setFixedNotes(newNotes);
     clearForm();
   };
 
@@ -97,7 +96,6 @@ const App = () => {
     });
 
     setNotes(newNotes);
-    setFixedNotes(newNotes);
   };
 
   const onDelete = (event) => {
@@ -112,7 +110,6 @@ const App = () => {
           icon: "success",
         });
         setNotes(newNotes);
-        setFixedNotes(newNotes);
       }
     });
   };
@@ -124,18 +121,17 @@ const App = () => {
 
   const onSearch = (event) => {
     const keyword = event.target.value.toLowerCase();
-    let showNotes = [];
+    const newNotes = notes.filter(
+      (note) =>
+        note.title.toLowerCase().includes(keyword) ||
+        note.body.toLowerCase().includes(keyword)
+    );
     if (keyword == "") {
-      showNotes = fixedNotes;
+      setNotes(newNotes);
+      setSearchedNotes([]);
     } else {
-      showNotes = fixedNotes.filter(
-        (note) =>
-          note.title.toLowerCase().includes(keyword) ||
-          note.body.toLowerCase().includes(keyword)
-      );
+      setSearchedNotes(newNotes);
     }
-
-    setNotes(showNotes);
   };
 
   return (
@@ -158,6 +154,7 @@ const App = () => {
         <NotesList
           activePage={activePage}
           notes={notes}
+          searchedNotes={searchedNotes}
           onShowDetail={onShowDetail}
           onArchive={onArchive}
           onDelete={onDelete}

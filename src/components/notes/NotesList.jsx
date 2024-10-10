@@ -3,14 +3,20 @@ import NotesListItem from "./NotesListItem";
 const NotesList = ({
   activePage,
   notes,
+  searchedNotes = [],
   onShowDetail,
   onArchive,
   onDelete,
 }) => {
-  const filterdNotes =
-    activePage == "Utama"
-      ? notes.filter((note) => !note.archived)
-      : notes.filter((note) => note.archived);
+  let filterdNotes = [];
+  if (searchedNotes.length > 0) {
+    filterdNotes = searchedNotes;
+  } else {
+    filterdNotes =
+      activePage == "Utama"
+        ? notes.filter((note) => !note.archived)
+        : notes.filter((note) => note.archived);
+  }
 
   return (
     <div className="grid lg:grid-cols-4 grid-cols-1 gap-5 mt-8">
