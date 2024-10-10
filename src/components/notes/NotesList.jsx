@@ -3,14 +3,18 @@ import NotesListItem from "./NotesListItem";
 const NotesList = ({
   activePage,
   notes,
+  keyword,
   searchedNotes = [],
   onShowDetail,
   onArchive,
   onDelete,
 }) => {
   let filterdNotes = [];
-  if (searchedNotes.length > 0) {
-    filterdNotes = searchedNotes;
+  if (searchedNotes.length > 0 || keyword != "") {
+    filterdNotes =
+      activePage == "Utama"
+        ? searchedNotes.filter((note) => !note.archived)
+        : searchedNotes.filter((note) => note.archived);
   } else {
     filterdNotes =
       activePage == "Utama"

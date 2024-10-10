@@ -14,6 +14,7 @@ import NotesDetail from "./components/notes/NotesDetail";
 const App = () => {
   const [notes, setNotes] = useState(getInitialData());
   const [searchedNotes, setSearchedNotes] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState("");
   const [detailNotes, setDetailNotes] = useState({});
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -132,6 +133,8 @@ const App = () => {
     } else {
       setSearchedNotes(newNotes);
     }
+
+    setSearchKeyword(keyword);
   };
 
   return (
@@ -155,6 +158,7 @@ const App = () => {
           activePage={activePage}
           notes={notes}
           searchedNotes={searchedNotes}
+          keyword={searchKeyword}
           onShowDetail={onShowDetail}
           onArchive={onArchive}
           onDelete={onDelete}
