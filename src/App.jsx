@@ -123,13 +123,15 @@ const App = () => {
   };
 
   const onSearch = (event) => {
-    const keyword = event.target.value;
+    const keyword = event.target.value.toLowerCase();
     let showNotes = [];
     if (keyword == "") {
       showNotes = fixedNotes;
     } else {
-      showNotes = fixedNotes.filter((note) =>
-        note.title.toLowerCase().includes(keyword.toLowerCase())
+      showNotes = fixedNotes.filter(
+        (note) =>
+          note.title.toLowerCase().includes(keyword) ||
+          note.body.toLowerCase().includes(keyword)
       );
     }
 

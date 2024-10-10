@@ -16,9 +16,11 @@ const NotesListItem = ({
       <p className="text-sm poppins-medium text-gray-500">
         {showFormattedDate(createdAt)}
       </p>
-      <h1 className="text-xl poppins-bold text-primary mt-1">{title}</h1>
+      <h1 className="text-xl poppins-bold text-primary mt-1">
+        {limitString(title, 20)}
+      </h1>
       <p className="leading-[22px] mt-0.5 h-[40px] text-[15px]">
-        {limitString(body)}
+        {limitString(body, 60)}
       </p>
       <div className="mt-3 flex items-center gap-2">
         <NotesListButton

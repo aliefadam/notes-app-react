@@ -55,9 +55,9 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("id-ID", options);
 };
 
-const limitString = (string) => {
-  if (string.length > 60) {
-    return string.slice(0, 60) + "...";
+const limitString = (string, limit) => {
+  if (string.length > limit) {
+    return string.slice(0, limit) + "...";
   }
   return string;
 };
